@@ -6,9 +6,8 @@ import java.util.Scanner;
 //Guessing number using random every step!!!
 public class Task_2_opposite2{
 
-    public static int guessing(int min, int max){
-        Random random = new Random();
-      
+    public static int guessing(int min, int max, Random random){
+
         return random.nextInt(min, max +1);
     }
 
@@ -22,25 +21,23 @@ public class Task_2_opposite2{
         System.out.println("Now I know everything. We can start!");
         int min = 0;
         int max = 100;
-        int guessednumber;
+        int i, guessednumber=0;
+        boolean isWon = false;
 
-        for(int i =1; i<=attempts; i++){
+        for(i =1; i<=attempts; i++){
             
-            guessednumber = guessing(min, max);
+            guessednumber = guessing(min, max, random);
             System.out.println("I guess it's: "+ guessednumber +"\nYour answers should be [too high/too low/yes]");
             String answer = input.nextLine();
           
-            if((i==attempts) && !(answer.equals("yes"))){
-                System.out.println("I couldn't guess your number in "+ attempts + " attempts. You win!");
-            }
-            else if(answer.equals("too high")){
+            if(answer.equals("too high")){
                 max = guessednumber - 1;
             }
             else if(answer.equals("too low")){
                 min = guessednumber + 1;
             }
             else if(answer.equals("yes")){
-                System.out.println("Yes! I'm right! Your number is: "+ guessednumber+".\nI guessed it in " + i+ " attempts.");
+                isWon = true;
                 break;
             }
             else{
@@ -51,9 +48,18 @@ public class Task_2_opposite2{
 
             //if we lie to computer
             if(min> max){
-                System.out.println("Wait! Your answers are contradicting! I don't want to play with u!");
                 break;
             }
+        }
+
+        if(isWon == true){
+            System.out.println("Yes! I'm right! Your number is: "+ guessednumber +".\nI guessed it in " + i+ " attempts.");
+        }
+        else if(min> max){
+            System.out.println("Wait! Your answers are contradicting! I don't want to play with u!");
+        }
+        else{
+            System.out.println("I couldn't guess your number in "+ attempts + " attempts. You win!");
         }
 
         input.close();
