@@ -1,5 +1,4 @@
 package Level_1.Task_2;
-import java.util.Random;
 import java.util.Scanner;
 
 //here we guess the number
@@ -12,7 +11,6 @@ public class Task_2_opposite1{
 
     public static void main(String[] args){
         Scanner input = new Scanner(System.in);
-        Random random = new Random();
 
         System.out.println("Hello! I'm computer, programmed to find the number you thought.\nYou can give me number of attempts, in which I will try to guess: ");
         int attempts = input.nextInt();
