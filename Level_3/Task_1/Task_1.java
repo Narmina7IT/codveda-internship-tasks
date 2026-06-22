@@ -2,7 +2,7 @@ package Level_3.Task_1;
 
 //Task_1.java
 import java.util.Scanner;
-import static org.learning.LibraryService.*;
+import static Level_3.Task_1.LibraryService.*;
 
 
 public class Task_1 {
