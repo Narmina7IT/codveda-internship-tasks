@@ -1,4 +1,5 @@
 package Level_2;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -39,6 +40,23 @@ public class Task_1 {
             return salary;
         }
 
+        //setters
+        public void setName(String name) { 
+			this.name = name;
+		}
+        public void setSurname(String surname){
+			this.surname = surname;
+		}
+        public void setID(int ID) {
+			this.ID = ID;
+		}
+        public void setJob_title(String job_title) {
+			this.job_title = job_title;
+		}
+        public void setSalary(int salary){
+			this.salary = salary;
+		}
+		
         @Override
         public String toString(){
             return name + " | " + surname + " | " + ID + " | " + job_title + " | $" + salary;
@@ -61,6 +79,7 @@ public class Task_1 {
                 case 3 -> update(s,employees);
                 case 4 -> delete(s,employees);
                 case 5 -> {
+					System.out.println("Exiting.");
                     s.close();
                     return;
                 }
@@ -97,18 +116,17 @@ public class Task_1 {
     }
 
     public static void readAll(ArrayList<Employee> employees){
-        System.out.println("All employees:");
-
         if(employees.isEmpty()){
             System.out.println("There is no employees.");
             return;
         }
 
+        System.out.println("All employees:");
         System.out.printf("%-4s | %-12s | %-15s | %-8s | %-20s | %-7s%n", "N", "Name", "Surname", "ID", "Job Title", "Salary");
 
         for(int i =0; i < employees.size(); i++){
             Employee e = employees.get(i);
-            System.out.printf("%-4d | %-12s | %-15s | %-8d | %-20s | $%-6d%n",(i+1), e.name, e.surname, e.ID, e.job_title, e.salary);
+            System.out.printf("%-4d | %-12s | %-15s | %-8d | %-20s | $%-6d%n",(i+1), e.getName(), e.getSurname(), e.getID(), e.getJob_title(), e.getSalary());
         }
         System.out.println("\nThe total number of employees in list is: "+ employees.size());
     }
@@ -130,78 +148,64 @@ public class Task_1 {
             return;
         }
 
-        Employee upd_emp = employees.get(index);
-        System.out.println("Updationg:\n" + upd_emp);
+        Employee e = employees.get(index);
+        System.out.println("Updationg:\n" + e);
 
         while(true) {
             System.out.println("If you want to exit, please write [esc].\n\bWrite what do you want to update:");
             String answer = s.nextLine().toLowerCase();
 
             switch (answer) {
-                case "name" -> {
-                    System.out.println("The current name is " + upd_emp.name);
-                    String newName = s.nextLine();
-                    if (!newName.isEmpty()) {
-                        upd_emp.name = newName;
-                    }
+				case "name" ->{
+                    System.out.print("New name: ");
+                    e.setName(s.nextLine());
                 }
-                case "surname" -> {
-                    System.out.println("The current surname is " + upd_emp.surname);
-                    String newSurname = s.nextLine();
-                    if (!newSurname.isEmpty()) {
-                        upd_emp.surname = newSurname;
-                    }
+
+                case "surname" ->{
+                    System.out.print("New surname: ");
+                    e.setSurname(s.nextLine());
                 }
-                case "job title" -> {
-                    System.out.println("The current job_title is " + upd_emp.job_title);
-                    String newJob_title = s.nextLine();
-                    if (!newJob_title.isEmpty()) {
-                        upd_emp.job_title = newJob_title;
-                    }
+
+                case "job" ->{
+                    System.out.print("New job: ");
+                    e.setJob_title(s.nextLine());
                 }
-                case "salary" -> {
-                    System.out.println("The current salary is " + upd_emp.salary);
-                    int newSalary = s.nextInt();
-                    s.nextLine();
-                    upd_emp.salary = newSalary;
+
+                case "salary" ->{
+                    System.out.print("New salary: ");
+                    e.setSalary(Integer.parseInt(s.nextLine()));
                 }
+
                 case "id" ->{
-                    System.out.println("The current ID is " + upd_emp.ID);
-                    int newID = s.nextInt();
-                    s.nextLine();
-                    upd_emp.ID = newID;
+                    System.out.print("New ID: ");
+                    e.setID(Integer.parseInt(s.nextLine()));
                 }
-                case "all" -> {
-                    System.out.println("The current name is " + upd_emp.name);
-                    String n = s.nextLine();
-                    if(!n.isEmpty()) upd_emp.name = n;
 
-                    System.out.println("The current surname is " + upd_emp.surname);
-                    String surn = s.nextLine();
-                    if(!surn.isEmpty()) upd_emp.surname = surn;
+                case "all" ->{
+                    System.out.print("New name: ");
+                    e.setName(s.nextLine());
 
-                    System.out.println("The current job_title is " + upd_emp.job_title);
-                    String jt = s.nextLine();
-                    if(!jt.isEmpty()) upd_emp.job_title = jt;
+                    System.out.print("New surname: ");
+                    e.setSurname(s.nextLine());
 
-                    System.out.println("The current ID is " + upd_emp.ID);
-                    int newID = s.nextInt();
-                    upd_emp.ID = newID;
+                    System.out.print("New job: ");
+                    e.setJob_title(s.nextLine());
 
-                    System.out.println("The current salary is " + upd_emp.salary);
-                    int sal = s.nextInt();
-                    upd_emp.salary = sal;
+                    System.out.print("New ID: ");
+                    e.setID(Integer.parseInt(s.nextLine()));
 
-                    System.out.println("All fields are updated!");
+                    System.out.print("New salary: ");
+                    e.setSalary(Integer.parseInt(s.nextLine()));
+
+                    System.out.println("Updated all fields!");
                     return;
                 }
-                case "esc" -> {
-                    System.out.println("You are exiting.");
+
+                case "esc" ->{
                     return;
                 }
-                default -> {
-                    System.out.println("Invalid input!");
-                }
+
+                default -> System.out.println("Invalid field");
             }
         }
     }
@@ -226,3 +230,4 @@ public class Task_1 {
         System.out.println("You delete the employee sucsefully.\nDeleted employee:\n" + removed);
     }
 }
+
