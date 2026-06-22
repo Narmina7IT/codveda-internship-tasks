@@ -2,18 +2,19 @@ package Level_1;
 import java.util.Random;
 import java.util.Scanner;
 
-//Guessing number using random every step(computer generates and we guess)
+//Number guessing game
 public class Task_2{
 
     public static void main(String[] args){
         Scanner input = new Scanner(System.in);
         Random random = new Random();
 
-        System.out.printf("Hello! I'm computer, programmed to find the number you thought.\nYou can give me number of attempts, in which You will try to guess.\nThe number of attempts: ");
-        int attempts = input.nextInt();
-        input.nextLine();
-        System.out.println("I will guess the number between 0 and 100.\nLet's start!");
-        int guessed_number = random.nextInt(0,101);
+        System.out.println("Hello! I generated a number between 0 and 100.");
+		System.out.println("Try to guess it!");
+        System.out.println("How many attempts do you want?");
+		int attempts = input.nextInt();
+        System.out.println("The number is between 0 and 100. Try to guess the number. Let's start!");
+        int secretNumber = random.nextInt(101);
 
         for(int i =1; i<=attempts; i++){
 
@@ -26,18 +27,18 @@ public class Task_2{
 
             int number = input.nextInt();
 
-            if((i == attempts) && !(number == guessed_number)){
-                System.out.println("You culdn't acknowledge my number! I win!\nThe number was "+ guessed_number + ".");
+            if(i == attempts && !(number == secretNumber)){
+                System.out.println("You culdn't acknowledge my number! I win!\nThe number was "+ secretNumber + ".");
             }
-            else if(number == guessed_number){
-                System.out.println("Yes! You are right! The number I guessed is "+ guessed_number+".");
+            else if(number == secretNumber){
+                System.out.println("Yes! You are right! The secret number was "+ secretNumber+".");
                 break;
             }
-            else if(number > guessed_number){
-                System.out.println("too high");
+            else if(number > secretNumber){
+                System.out.println("too high. Attempts left: " + (attempts -i));
             }
-            else if(number < guessed_number){
-                System.out.println("too low");
+            else if(number < secretNumber){
+                System.out.println("too low. Attempts left: " + (attempts -i));
             }
         }
 
