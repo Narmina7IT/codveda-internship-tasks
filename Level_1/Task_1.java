@@ -17,9 +17,6 @@ public class Task_1{
     }
 
     public static float division(float a, float b){
-        if(b==0){
-            throw new IllegalArgumentException("You can NOT divide by zero!");
-        }
         return a/b;
     }
 
@@ -44,8 +41,12 @@ public class Task_1{
 
             case "multiplication","*" -> result = multiplication(a,b);
 
-            case "division", "/" -> result = division(a,b);
-
+            case "division", "/" -> {
+				if(b==0){
+					throw new IllegalArgumentException("You can NOT divide by zero!");
+				}
+				result = division(a,b);
+			}
             default -> {
                 System.out.println("Unknown operation!");
                 input.close();
